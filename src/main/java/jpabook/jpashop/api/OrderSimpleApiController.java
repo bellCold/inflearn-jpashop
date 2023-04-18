@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static jpabook.jpashop.api.MemberApiController.Result;
@@ -23,13 +22,13 @@ public class OrderSimpleApiController {
 
     private final OrderRepository orderRepository;
 
-    @GetMapping("/api/v1/orders")
+    @GetMapping("/api/v1/simple-orders")
     public List<Order> ordersV1() {
         List<Order> orders = orderRepository.findAll();
         return orders;
     }
 
-    @GetMapping("/api/v2/orders")
+    @GetMapping("/api/v2/simple-orders")
     public Result ordersV2() {
         List<SimpleOrderDto> collect = orderRepository.findAll().stream()
                 .map(SimpleOrderDto::new)
@@ -38,7 +37,7 @@ public class OrderSimpleApiController {
         return new Result(collect);
     }
 
-    @GetMapping("/api/v3/orders")
+    @GetMapping("/api/v3/simple-orders")
     public Result ordersV3() {
         List<SimpleOrderDto> collect = orderRepository.findAllWithMemberDelivery().stream()
                 .map(SimpleOrderDto::new)
