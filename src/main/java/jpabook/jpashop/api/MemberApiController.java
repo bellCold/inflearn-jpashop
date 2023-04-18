@@ -1,5 +1,6 @@
 package jpabook.jpashop.api;
 
+import jpabook.jpashop.api.reponse.Result;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.service.MemberService;
 import lombok.AllArgsConstructor;
@@ -69,12 +70,6 @@ public class MemberApiController {
                 .collect(toList());
 
         return new Result(collect);
-    }
-
-    @Getter
-    @AllArgsConstructor
-    static class Result<T> {
-        private T data;
     }
 
     @Getter

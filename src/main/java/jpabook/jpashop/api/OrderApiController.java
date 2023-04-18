@@ -1,5 +1,6 @@
 package jpabook.jpashop.api;
 
+import jpabook.jpashop.api.reponse.Result;
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
@@ -35,12 +36,24 @@ public class OrderApiController {
     }
 
     @GetMapping("/api/v2/orders")
-    public List<OrderDto> ordersV2() {
-        List<Order> orders = orderRepository.findAll();
-        return orders.stream()
-                .map(o -> new OrderDto(o))
+    public Result ordersV2() {
+        List<OrderDto> collect = orderRepository.findAll().stream()
+                .map(OrderDto::new)
                 .collect(toList());
+
+        return new Result(collect);
     }
+
+    @GetMapping("/api/v3/orders")
+    public Result ordersV3() {
+        List<Order> orders = orderRepository.findAllWithItem();
+        List<OrderDto> collect = orders.stream()
+                .map(OrderDto::new)
+                .collect(toList());
+
+        return new Result(collect);
+    }
+
 
     @Getter
     static class OrderDto {

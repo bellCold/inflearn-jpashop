@@ -1,5 +1,6 @@
 package jpabook.jpashop.api;
 
+import jpabook.jpashop.api.reponse.Result;
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
@@ -14,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static jpabook.jpashop.api.MemberApiController.Result;
 
 @RestController
 @RequiredArgsConstructor
