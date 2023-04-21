@@ -46,7 +46,6 @@ public class OrderSimpleApiController {
     }
 
     @Data
-    @AllArgsConstructor
     static class SimpleOrderDto {
         private Long orderId;
         private String name;
