@@ -22,20 +22,20 @@ public class OrderQueryRepository {
 
     private List<OrderItemQueryDto> findOrderItem(Long orderId) {
         return em.createQuery(
-                        "select new jpabook.jpashop.repository.order.query.OrderItemQueryDto(oi.order.id, i.name, oi.orderPrice, oi.count)" +
-                                " from OrderItem oi" +
-                                " join oi.item i" +
-                                " where oi.order.id = :orderId", OrderItemQueryDto.class)
+                "select new jpabook.jpashop.repository.order.query.OrderItemQueryDto(oi.order.id, i.name, oi.orderPrice, oi.count)" +
+                        " from OrderItem oi" +
+                        " join oi.item i" +
+                        " where oi.order.id = :orderId", OrderItemQueryDto.class)
                 .setParameter("orderId", orderId)
                 .getResultList();
     }
 
     private List<OrderQueryDtos> findOrders() {
         return em.createQuery(
-                        "select new jpabook.jpashop.repository.order.query.OrderQueryDtos(o.id, m.name, o.orderDate, d.address)" +
-                                " from Order o" +
-                                " join o.member m" +
-                                " join o.delivery d", OrderQueryDtos.class)
+                "select new jpabook.jpashop.repository.order.query.OrderQueryDtos(o.id, m.name, o.orderDate, o.status, d.address)" +
+                        " from Order o" +
+                        " join o.member m" +
+                        " join o.delivery d", OrderQueryDtos.class)
                 .getResultList();
     }
 
